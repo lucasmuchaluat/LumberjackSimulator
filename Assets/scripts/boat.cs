@@ -5,18 +5,34 @@ public class boat : MonoBehaviour {
 
 	public float turnSpeed = 1000f;
 	public float accellerateSpeed = 1000f;
+	private GameManager gm;
+
 
 	private Rigidbody rbody;
 
 	// Use this for initialization
 	void Start () 
 	{
+		gm = GameManager.GetInstance();
+
 		rbody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		if (gm.gameState != GameManager.GameState.GAME &
+			 gm.gameState != GameManager.GameState.RESUME)
+		{
+			return;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Escape) && gm.gameState == GameManager.GameState.GAME)
+		{
+			gm.ChangeState(GameManager.GameState.PAUSE);
+		}
+
+
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis("Vertical");
 
