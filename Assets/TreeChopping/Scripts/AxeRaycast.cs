@@ -7,6 +7,7 @@ public class AxeRaycast : MonoBehaviour
     //Variables
     public GameObject axe;
     private bool isEquiped = false;
+    public AudioClip axeHit;
 
     private void Update()
     {
@@ -30,9 +31,15 @@ public class AxeRaycast : MonoBehaviour
         {
             if(hit.collider.tag == "tree" && Input.GetMouseButtonDown(0) && isEquiped == true)
             {
+                AudioManager.PlaySFX(axeHit);
                 Tree treeScript = hit.collider.gameObject.GetComponent<Tree>();
                 Debug.Log("Health: " + treeScript.treeHealth);
                 treeScript.treeHealth--;
+            }
+
+            if(hit.collider.tag == "palm" && Input.GetMouseButtonDown(0) && isEquiped == true)
+            {
+                Debug.Log("NÃO CORTE OS COQUEIROS, SE ESQUECEU QUE ELES TE DÃO AGUA?");
             }
         }
     }

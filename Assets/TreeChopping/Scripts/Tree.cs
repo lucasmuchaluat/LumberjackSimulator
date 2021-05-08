@@ -10,6 +10,7 @@ public class Tree : MonoBehaviour
     private bool isFallen = false;
     private Color alphaColor;
     private float timeToFade = 1.0f;
+    public AudioClip treeFall;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class Tree : MonoBehaviour
     {
         if(treeHealth <= 0 && isFallen == false)
         {
+            AudioManager.PlaySFX(treeFall);
             Rigidbody rb = thisTree.AddComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.useGravity = true;
