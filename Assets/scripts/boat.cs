@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using scripts;
 
 public class boat : MonoBehaviour {
 
@@ -21,13 +22,14 @@ public class boat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		gm = GameManager.GetInstance();
 		if (gm.gameState != GameManager.GameState.GAME &
 			 gm.gameState != GameManager.GameState.RESUME)
 		{
 			return;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Escape) && gm.gameState == GameManager.GameState.GAME)
+		if (Input.GetKeyDown(KeyCode.Escape) && (gm.gameState == GameManager.GameState.GAME || gm.gameState != GameManager.GameState.RESUME))
 		{
 			gm.ChangeState(GameManager.GameState.PAUSE);
 		}

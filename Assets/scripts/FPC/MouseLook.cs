@@ -1,4 +1,5 @@
 using System;
+using scripts;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
@@ -14,6 +15,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float MaximumX = 90F;
         public bool smooth;
         public float smoothTime = 5f;
+        private GameManager gm;
+
 
 
         private Quaternion m_CharacterTargetRot;
@@ -24,11 +27,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_CharacterTargetRot = character.localRotation;
             m_CameraTargetRot = camera.localRotation;
+            gm = GameManager.GetInstance();
+
         }
 
 
         public void LookRotation(Transform character, Transform camera)
         {
+            if (gm.gameState != GameManager.GameState.GAME &
+                gm.gameState != GameManager.GameState.RESUME)
+            {
+                return;
+            }
+
+
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
             float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 

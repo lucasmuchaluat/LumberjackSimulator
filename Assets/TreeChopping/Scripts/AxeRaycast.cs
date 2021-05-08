@@ -8,6 +8,8 @@ public class AxeRaycast : MonoBehaviour
     public GameObject axe;
     private bool isEquiped = false;
     public AudioClip axeHit;
+    public AudioClip coqueiro;
+
 
     private void Update()
     {
@@ -40,6 +42,7 @@ public class AxeRaycast : MonoBehaviour
             if(hit.collider.tag == "palm" && Input.GetMouseButtonDown(0) && isEquiped == true)
             {
                 Debug.Log("NÃO CORTE OS COQUEIROS, SE ESQUECEU QUE ELES TE DÃO AGUA?");
+                AudioManager.PlaySFX(coqueiro);
             }
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using scripts;
 using UnityEngine;
 using UnityStandardAssets.Utility;
 
@@ -6,6 +7,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     public class HeadBob : MonoBehaviour
     {
+        private GameManager gm;
         public Camera Camera;
         public CurveControlledBob motionBob = new CurveControlledBob();
         public LerpControlledBob jumpAndLandingBob = new LerpControlledBob();
@@ -28,7 +30,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
-          //  m_CameraRefocus.GetFocusPoint();
+            if (gm.gameState != GameManager.GameState.GAME &
+                gm.gameState != GameManager.GameState.RESUME)
+            {
+                return;
+            }
+            //  m_CameraRefocus.GetFocusPoint();
             Vector3 newCameraPosition;
             if (rigidbodyFirstPersonController.Velocity.magnitude > 0 && rigidbodyFirstPersonController.Grounded)
             {

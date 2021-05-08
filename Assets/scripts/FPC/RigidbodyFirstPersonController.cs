@@ -1,13 +1,17 @@
 using System;
+using scripts;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
+
     [RequireComponent(typeof (Rigidbody))]
     [RequireComponent(typeof (CapsuleCollider))]
     public class RigidbodyFirstPersonController : MonoBehaviour
     {
+        private GameManager gm;
+
         [Serializable]
         public class MovementSettings
         {
@@ -118,6 +122,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Start()
         {
+            gm = GameManager.GetInstance();
+
             m_RigidBody = GetComponent<Rigidbody>();
             m_Capsule = GetComponent<CapsuleCollider>();
             mouseLook.Init (transform, cam.transform);
@@ -126,6 +132,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
+            if (gm.gameState != GameManager.GameState.GAME &
+                gm.gameState != GameManager.GameState.RESUME)
+            {
+                return;
+            }
+
             RotateView();
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
@@ -137,6 +149,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+            if (gm.gameState != GameManager.GameState.GAME &
+                gm.gameState != GameManager.GameState.RESUME)
+            {
+                Debug.Log("AAAAAA");
+                return;
+            }
+
             GroundCheck();
             Vector2 input = GetInput();
 
@@ -222,6 +241,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
+            if (gm.gameState != GameManager.GameState.GAME &
+                gm.gameState != GameManager.GameState.RESUME)
+            {
+                return;
+            }
             //avoids the mouse looking if the game is effectively paused
             if (Mathf.Abs(Time.timeScale) < float.Epsilon) return;
 
