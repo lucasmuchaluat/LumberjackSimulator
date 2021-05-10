@@ -28,6 +28,10 @@ public class AxeRaycast : MonoBehaviour
         }
 
 
+        if (Input.GetMouseButtonDown(0) && isEquiped == true)
+        {
+            animator.SetFloat("Axe", 1.0f);
+        }
 
 
         //Raycast
@@ -35,30 +39,17 @@ public class AxeRaycast : MonoBehaviour
         RaycastHit hit;
 
         //Origin, Direction, RaycastHit, Length
-        //
-        if (Input.GetMouseButtonDown(0) && isEquiped == true)
-        {
-            Debug.Log("ENTROU NO IF DAAAAAAAAAAA");
-
-            animator.SetFloat("Axe", 1.0f);
-
-        }
-
         if (Physics.Raycast(transform.position, fwd, out hit, 20))
         {
-            Debug.Log("ANTES NO IF");
-
             if (hit.collider.tag == "tree" && Input.GetMouseButtonDown(0) && isEquiped == true)
             {
-                Debug.Log("ENTROU NO IF");
-
                 AudioManager.PlaySFX(axeHit);
                 Tree treeScript = hit.collider.gameObject.GetComponent<Tree>();
                 Debug.Log("Health: " + treeScript.treeHealth);
                 treeScript.treeHealth--;
             }
 
-            if(hit.collider.tag == "palm" && Input.GetMouseButtonDown(0) && isEquiped == true)
+            if(hit.collider.tag == "broadleaf" && Input.GetMouseButtonDown(0) && isEquiped == true)
             {
                 Debug.Log("NÃO CORTE OS COQUEIROS, SE ESQUECEU QUE ELES TE DÃO AGUA?");
                 AudioManager.PlaySFX(coqueiro);
