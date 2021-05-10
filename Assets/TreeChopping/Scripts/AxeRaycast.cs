@@ -44,13 +44,13 @@ public class AxeRaycast : MonoBehaviour
         RaycastHit hit;
 
         //Origin, Direction, RaycastHit, Length
-        if (Physics.Raycast(transform.position, fwd, out hit, 20))
+        if (Physics.Raycast(transform.position, fwd, out hit, 10))
         {
             if (hit.collider.tag == "tree" && Input.GetMouseButtonDown(0) && isEquiped == true)
             {
                 AudioManager.PlaySFX(axeHit);
                 Tree treeScript = hit.collider.gameObject.GetComponent<Tree>();
-                Debug.Log("Health: " + treeScript.treeHealth);
+                // Debug.Log("Health: " + treeScript.treeHealth);
                 treeScript.treeHealth--;
             }
 

@@ -15,6 +15,11 @@ public class UI_Pontos : MonoBehaviour
    void Update()
    {
         var player = gm.GetActivePlayer();
+
+        if (gm.pontos >= 20)
+        {
+            gm.ChangeState(GameManager.GameState.ENDGAME);
+        }
         
         if (gm.pontos == 0)
         {

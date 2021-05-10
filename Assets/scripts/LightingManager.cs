@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using scripts;
 
 // BASED ON https://github.com/Glynn-Taylor/Tutorials/releases/tag/1.0
 
@@ -11,27 +12,48 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private Light DirectionalLight;
     [SerializeField] private LightingPreset Preset;
     //Variables
-    // [SerializeField, Range(6, 19)] private float TimeOfDay;
-    [SerializeField, Range(0, 24)] private float TimeOfDay;
+    // [SerializeField, Range(0, 24)] private float TimeOfDay = 6f;
+    [SerializeField, Range(0, 720)] private float TimeOfDay = 180f;
     [SerializeField] private float minutes;
+    private bool getTime = false;
 
+    private GameManager gm;
+
+
+    private void Start()
+    {
+        gm = GameManager.GetInstance();
+    }
 
     private void Update()
     {
         if (Preset == null)
             return;
+        
+        gm = GameManager.GetInstance();
+		if (gm.gameState != GameManager.GameState.GAME &
+			 gm.gameState != GameManager.GameState.RESUME)
+		{
+			return;
+		}
 
-        if (Application.isPlaying)
+        if (Input.GetKeyDown(KeyCode.Escape) && (gm.gameState == GameManager.GameState.GAME || gm.gameState != GameManager.GameState.RESUME))
+		{
+			gm.ChangeState(GameManager.GameState.PAUSE);
+		}
+
+        if (Application.isPlaying) // && getTime == false)
         {
             //(Replace with a reference to the game time)
             // StartCoroutine(increaseTime());
             TimeOfDay += Time.deltaTime;
-            TimeOfDay %= 24; //Modulus to ensure always between 0-24
-            UpdateLighting(TimeOfDay / 24f);
+            TimeOfDay %= 720; //Modulus to ensure always between 0-720
+            UpdateLighting(TimeOfDay / 720f);
         }
         else
         {
-            UpdateLighting(TimeOfDay / 24f);
+            UpdateLighting(TimeOfDay / 720f);
+            // UpdateLighting(TimeOfDay / 24f);
         }
     }
 
@@ -80,10 +102,11 @@ public class LightingManager : MonoBehaviour
 
     private IEnumerator increaseTime()
     {
-        Debug.Log("TIME OF THE DAY: " + TimeOfDay);
+        getTime = true;
         yield return new WaitForSeconds(1);
         TimeOfDay += 13/(minutes*60);
-        TimeOfDay %= 19; //Modulus to ensure always between 0-24
-        UpdateLighting(TimeOfDay / 13f);
+        TimeOfDay %= 24; //Modulus to ensure always between 0-24
+        UpdateLighting(TimeOfDay / 24f);
+        getTime = false;
     }
 }

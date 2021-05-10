@@ -34,7 +34,6 @@ public class boat : MonoBehaviour {
 			gm.ChangeState(GameManager.GameState.PAUSE);
 		}
 
-
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis("Vertical");
 
