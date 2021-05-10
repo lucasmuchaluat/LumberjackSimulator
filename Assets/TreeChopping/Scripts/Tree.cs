@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using scripts;
 using UnityEngine;
 
 public class Tree : MonoBehaviour
@@ -11,9 +12,13 @@ public class Tree : MonoBehaviour
     private Color alphaColor;
     private float timeToFade = 1.0f;
     public AudioClip treeFall;
+    private GameManager gm;
+
 
     private void Start()
     {
+        gm = GameManager.GetInstance();
+
         thisTree = transform.parent.gameObject;
         // alphaColor = thisTree.AddComponent<Renderer>().material.color;
         // alphaColor.a = 0;
@@ -37,6 +42,7 @@ public class Tree : MonoBehaviour
 
     private IEnumerator destroyTree()
     {
+        gm.pontos += 1;
         yield return new WaitForSeconds(7);
         Destroy(thisTree);
     }

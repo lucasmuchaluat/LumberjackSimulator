@@ -33,6 +33,11 @@ public class AxeRaycast : MonoBehaviour
             animator.SetFloat("Axe", 1.0f);
         }
 
+        if (Input.GetMouseButtonUp(0) && isEquiped == true)
+        {
+            animator.SetFloat("Axe", -1.0f);
+        }
+
 
         //Raycast
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
