@@ -81,14 +81,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
 
-
-
-            if (Input.GetKeyDown(KeyCode.Escape)
-                && (gm.gameState == GameManager.GameState.GAME || gm.gameState != GameManager.GameState.RESUME))
-            {
-                gm.ChangeState(GameManager.GameState.PAUSE);
-            }
-
             if (gm.gameState != GameManager.GameState.GAME &
                 gm.gameState != GameManager.GameState.RESUME)
             {

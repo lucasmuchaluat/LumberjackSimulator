@@ -1,5 +1,6 @@
 ﻿using scripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Pontos : MonoBehaviour
@@ -14,13 +15,14 @@ public class UI_Pontos : MonoBehaviour
    
    void Update()
    {
-        var player = gm.GetActivePlayer();
-
-        if (gm.pontos >= 20)
+        gm = GameManager.GetInstance();
+        if (gm.pontos >= 2)
         {
-            gm.ChangeState(GameManager.GameState.ENDGAME);
+            SceneManager.LoadScene(2);
+            gm.ChangeState(GameManager.GameState.MENU);
+            gm.pontos = 0;
         }
-        
+
         if (gm.pontos == 0)
         {
             textComp.text = "0";

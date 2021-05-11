@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using scripts;
+using UnityEngine.SceneManagement;
 
 // BASED ON https://github.com/Glynn-Taylor/Tutorials/releases/tag/1.0
 
@@ -37,11 +38,6 @@ public class LightingManager : MonoBehaviour
 			return;
 		}
 
-        if (Input.GetKeyDown(KeyCode.Escape) && (gm.gameState == GameManager.GameState.GAME || gm.gameState != GameManager.GameState.RESUME))
-		{
-			gm.ChangeState(GameManager.GameState.PAUSE);
-		}
-
         if (Application.isPlaying) // && getTime == false)
         {
             //(Replace with a reference to the game time)
@@ -54,6 +50,13 @@ public class LightingManager : MonoBehaviour
         {
             UpdateLighting(TimeOfDay / 720f);
             // UpdateLighting(TimeOfDay / 24f);
+        }
+
+        if (TimeOfDay > 580)
+        {
+            SceneManager.LoadScene(3);
+            gm.ChangeState(GameManager.GameState.MENU);
+            TimeOfDay = 180f;
         }
     }
 
