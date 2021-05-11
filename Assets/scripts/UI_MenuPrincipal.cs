@@ -8,7 +8,6 @@ public class UI_MenuPrincipal : MonoBehaviour
 {
     GameManager gm;
 
-    public InputField InputName;
 
     private void OnEnable()
     {
@@ -18,7 +17,6 @@ public class UI_MenuPrincipal : MonoBehaviour
     
     public void Comecar()
     {
-        gm.AddOrActivatePlayer(InputName.text, 0, true);
         gm.ChangeState(GameManager.GameState.GAME);
     }
 }

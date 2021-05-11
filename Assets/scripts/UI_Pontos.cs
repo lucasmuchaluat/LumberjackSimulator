@@ -16,7 +16,7 @@ public class UI_Pontos : MonoBehaviour
    void Update()
    {
         gm = GameManager.GetInstance();
-        if (gm.pontos >= 2)
+        if (gm.pontos >= 20)
         {
             SceneManager.LoadScene(2);
             gm.ChangeState(GameManager.GameState.MENU);

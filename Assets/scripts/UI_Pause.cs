@@ -20,7 +20,7 @@ public class UI_Pause : MonoBehaviour
 
     public void Inicio()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         gm.ChangeState(GameManager.GameState.MENU);
     }
 
