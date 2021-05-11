@@ -25,11 +25,12 @@ public class UI_Pontos : MonoBehaviour
 
         if (gm.pontos == 0)
         {
-            textComp.text = "0";
+            textComp.text = "00";
         }
         else
         {
-            textComp.text = gm.pontos.ToString();
+            textComp.text = string.Format("{0:00}", gm.pontos);
+            // textComp.text = gm.pontos.ToString();
         }
     }
 }

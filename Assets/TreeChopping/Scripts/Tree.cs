@@ -9,8 +9,6 @@ public class Tree : MonoBehaviour
     GameObject thisTree;
     public int treeHealth = 5;
     private bool isFallen = false;
-    private Color alphaColor;
-    private float timeToFade = 1.0f;
     public AudioClip treeFall;
     private GameManager gm;
 
@@ -18,11 +16,7 @@ public class Tree : MonoBehaviour
     private void Start()
     {
         gm = GameManager.GetInstance();
-
         thisTree = transform.parent.gameObject;
-        // alphaColor = thisTree.AddComponent<Renderer>().material.color;
-        // alphaColor.a = 0;
-        
     }
 
     private void FixedUpdate()
@@ -35,7 +29,6 @@ public class Tree : MonoBehaviour
             rb.useGravity = true;
             rb.AddForce(Vector3.forward*3, ForceMode.Impulse);
             StartCoroutine(destroyTree());
-            // thisTree.GetComponent<Renderer>().material.color = Color.Lerp(thisTree.GetComponent<Renderer>().material.color, alphaColor, timeToFade * Time.deltaTime);
             isFallen = true;
         }
     }

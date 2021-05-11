@@ -15,11 +15,10 @@ public class LightingManager : MonoBehaviour
     //Variables
     // [SerializeField, Range(0, 24)] private float TimeOfDay = 6f;
     [SerializeField, Range(0, 720)] private float TimeOfDay = 180f;
-    [SerializeField] private float minutes;
-    private bool getTime = false;
+    // [SerializeField] private float minutes;
+    // private bool getTime = false;
 
     private GameManager gm;
-
 
     private void Start()
     {
@@ -103,13 +102,13 @@ public class LightingManager : MonoBehaviour
         }
     }
 
-    private IEnumerator increaseTime()
-    {
-        getTime = true;
-        yield return new WaitForSeconds(1);
-        TimeOfDay += 13/(minutes*60);
-        TimeOfDay %= 24; //Modulus to ensure always between 0-24
-        UpdateLighting(TimeOfDay / 24f);
-        getTime = false;
-    }
+    // private IEnumerator increaseTime()
+    // {
+    //     getTime = true;
+    //     yield return new WaitForSeconds(1);
+    //     TimeOfDay += 13/(minutes*60);
+    //     TimeOfDay %= 24; //Modulus to ensure always between 0-24
+    //     UpdateLighting(TimeOfDay / 24f);
+    //     getTime = false;
+    // }
 }

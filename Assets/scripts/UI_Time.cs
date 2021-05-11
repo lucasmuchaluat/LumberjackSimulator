@@ -21,8 +21,7 @@ public class UI_Time : MonoBehaviour
    
    void Update()
    {
-
-
+       
         gm = GameManager.GetInstance();
 
 
@@ -32,15 +31,11 @@ public class UI_Time : MonoBehaviour
             gm.ChangeState(GameManager.GameState.PAUSE);
         }
 
-
         if (gm.gameState != GameManager.GameState.GAME &
                 gm.gameState != GameManager.GameState.RESUME)
         {
             return;
         }
-
-
-
 
         if (takingAway == false && secondsLeft > 0)
         {
@@ -51,6 +46,7 @@ public class UI_Time : MonoBehaviour
         {
             SceneManager.LoadScene(3);
             secondsLeft = 360;
+            gm.pontos = 0;
             gm.ChangeState(GameManager.GameState.MENU);
         }
     }
